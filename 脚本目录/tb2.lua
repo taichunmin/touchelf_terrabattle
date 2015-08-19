@@ -82,8 +82,8 @@ function main()
     for ik, iv in pairs(path_1_5) do
         -- logDebug(ik, iv);
         repeat
-            x, y = findImageInRegionFuzzy("/var/touchelf/tb/tb_timebar_full_1_5.bmp", 80, 600, 190, 830, 280, 0xFFFFFF);
-            mSleep(2000);
+            x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
+            mSleep(500);
         until x ~= -1 and y ~= -1;
         mSleep(1000);
         move_path(iv);
