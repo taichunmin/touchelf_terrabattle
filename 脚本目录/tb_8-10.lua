@@ -24,10 +24,9 @@ function main()
             x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
             mSleep(500);
         until x ~= -1 and y ~= -1;
-
         mSleep(1000);
         move_path(iv);
     end
-    logDebug('tb_timebar_full_8_10: ('..x..', '..y..')');
+
     mSleep(1000);
 end
