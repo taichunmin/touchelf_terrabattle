@@ -1,7 +1,3 @@
--- 适用屏幕参数
-SCREEN_RESOLUTION="1536x2048";
-SCREEN_COLOR_BITS=32;
-
 function pos(i, j)
     if type(i) ~= "number" or type(j) ~= "number" or i < 1 or 6 < i or j < 1 or 8 < j then
         logDebug(string.format("pos (%d, %d) error.", i, j));
@@ -53,52 +49,4 @@ function move_path(path)
 
     touchUp(finger_id);
     mSleep(5000);
-end
-
--- 主入口函数
-function main()
-    math.randomseed( os.time() );
-    rotateScreen(0);
-    mSleep(960);
-    touchDown(10, 776, 1330);
-    mSleep(48);
-    touchUp(10);
-
-    mSleep(2252);
-    touchDown(7, 474, 1820);
-    mSleep(66);
-    touchUp(7);
-
-    local path_1_5 = {
-        "289662688888744934223",
-        "149666948",
-        "62476122268311624867178",
-        "55184189988312",
-        "26692981234268499887",
-        "52122322786247",
-    };
-
-    -- during stage
-    for ik, iv in pairs(path_1_5) do
-        -- logDebug(ik, iv);
-        repeat
-            x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
-            mSleep(500);
-        until x ~= -1 and y ~= -1;
-        mSleep(1000);
-        move_path(iv);
-    end
-
-    -- stage end
-    repeat
-        mSleep(2000);
-        x, y = findImageInRegionFuzzy("/var/touchelf/tb/stage_selection_stamina.bmp", 90, 583, 173, 690, 226, 0xFFFFFF);
-        if x == -1 and y == -1 then
-			touchDown(9, 100, 100);
-			mSleep(60);
-			touchUp(9);
-        end
-    until x ~= -1 and y ~= -1;
-
-    mSleep(1000);
 end
