@@ -30,25 +30,12 @@ function main()
 
     -- during stage
     for ik, iv in pairs(path_1_5) do
-        -- logDebug(ik, iv);
-        repeat
-            x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
-            mSleep(500);
-        until x ~= -1 and y ~= -1;
+        wait_your_turn();
         mSleep(1000);
         move_path(iv);
     end
 
     -- stage end
-    repeat
-        mSleep(2000);
-        x, y = findImageInRegionFuzzy("/var/touchelf/tb/stage_selection_stamina.bmp", 90, 583, 173, 690, 226, 0xFFFFFF);
-        if x == -1 and y == -1 then
-			touchDown(9, 100, 100);
-			mSleep(60);
-			touchUp(9);
-        end
-    until x ~= -1 and y ~= -1;
-
+    click_wait_to_menu();
     mSleep(1000);
 end

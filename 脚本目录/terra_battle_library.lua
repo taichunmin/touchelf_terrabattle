@@ -50,3 +50,22 @@ function move_path(path)
     touchUp(finger_id);
     mSleep(5000);
 end
+
+function wait_your_turn()
+    repeat
+        x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
+        mSleep(500);
+    until x ~= -1 and y ~= -1;
+end
+
+function click_wait_to_menu()
+    repeat
+        mSleep(2000);
+        x, y = findImageInRegionFuzzy("/var/touchelf/tb/stage_selection_stamina.bmp", 90, 583, 173, 690, 226, 0xFFFFFF);
+        if x == -1 and y == -1 then
+            touchDown(9, 100, 100);
+            mSleep(60);
+            touchUp(9);
+        end
+    until x ~= -1 and y ~= -1;
+end
