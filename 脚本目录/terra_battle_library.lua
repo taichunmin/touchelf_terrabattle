@@ -54,7 +54,7 @@ end
 function wait_your_turn()
     repeat
         x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
-        mSleep(500);
+        mSleep(750);
     until x ~= -1 and y ~= -1;
 end
 
