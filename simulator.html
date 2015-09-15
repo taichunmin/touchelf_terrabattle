@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <style>
+    body {
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif,"微軟正黑體";
+    }
+    .board-box {
+      position: relative;
+      padding: 0;
+    }
+    .board-box:before {
+      content: "";
+      display: block;
+      padding-top: 133.33%;
+    }
+    .board-content {
+      position:  absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+    .board-content > table {
+      height: 100%;
+    }
+    .board-content > table > tbody > tr > td {
+      position:  relative;
+      vertical-align: middle;
+      width: 16.67%;
+      height: 12.5%;
+      padding: 3px;
+    }
+    #board-panel td .glyphicon{
+      font-size: 150%;
+    }
+    .form-control-feedback{
+      display: none;
+    }
+    .has-feedback .form-control-feedback{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="margin-top: 10px">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-default" id="board-panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <span class="glyphicon glyphicon-th"></span> Terra Battle 模擬器
+            </h3>
+          </div>
+          <div class="panel-body board-box text-center">
+            <div class="board-content">
+              <table class="table table-bordered table-condensed" id="board">
+                <tr>
+                  <td class="info">
+                    <span class="glyphicon glyphicon-user"></span>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="player" class="col-sm-2 control-label">玩家</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="player" aria-describedby="playerIsFocused" value="321454285868">
+              <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+              <span id="playerIsFocused" class="sr-only">(focused)</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="enemy" class="col-sm-2 control-label">敵人</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="enemy" aria-describedby="enemyIsFocused" value="6153">
+              <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+              <span id="enemyIsFocused" class="sr-only">(focused)</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="friend" class="col-sm-2 control-label">友軍</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" aria-describedby="friendIsFocused" id="friend">
+              <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+              <span id="friendIsFocused" class="sr-only">(focused)</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="path" class="col-sm-2 control-label">路徑</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="10" aria-describedby="pathIsFocused" id="path">289662688888744934223
+d53
+149666948
+d61
+a35e36e</textarea>
+              <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+              <span id="pathIsFocused" class="sr-only">(focused)</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script>
+  (function($){
+    var $autoInputTarget;
+    var direct = {
+      '1': [ 1, -1],
+      '4': [ 0, -1],
+      '7': [-1, -1],
+      '8': [-1,  0],
+      '9': [-1,  1],
+      '6': [ 0,  1],
+      '3': [ 1,  1],
+      '2': [ 1,  0],
+    };
+
+    String.prototype.chunk = function(size) {
+      return [].concat.apply([],
+          this.split('').map(function(x,i){ return i%size ? [] : this.slice(i,i+size) }, this)
+      )
+    }
+
+    function rander() {
+      // rander player, enemy, friend
+      var config = {
+        friend: {
+          icon: 'music',
+          bg: 'warning',
+        },
+        player: {
+          icon: 'user',
+          bg: 'info',
+        },
+        enemy: {
+          icon: 'remove-circle',
+          bg: 'danger',
+        }
+      };
+
+      var activePos = [];
+      var roleMap = {p: "player", f: "friend", e: "enemy"};
+
+      $('#board-panel td').each(function(){
+        $(this).removeClass('info danger warning success').html('');
+      });
+
+      $('#player, #enemy, #friend, #path').closest('.form-group').removeClass('has-error');
+
+      var board = [[], [], [], [], [], [], [], []];
+      $.each(config, function(ik, iv){
+        var positions = $('#'+ik).val().replace(/ /g,'').chunk(2);
+        $('#'+ik).val(positions.join(' '));
+        $.each(positions, function(jk, jv) {
+          if(jv.length != 2)
+            return false;
+          if( board[ jv[1]-1 ][ jv[0]-1 ] != null ) {
+            $('#'+ik).closest('.form-group').addClass('has-error');
+            return true;
+          }
+          board[ jv[1]-1 ][ jv[0]-1 ] = ik;
+        });
+      });
+
+      // move path
+      var paths = $('#path').val().split("\n");
+      $.each(paths, function(i, path){
+        if(/^\d+$/.test(path)) {
+          var ret = movePath(board, path);
+          // console.log(path, ret);
+          if(ret.err != null) {
+            // 錯誤處理
+            return false;
+          }
+          board = ret.board;
+          activePos = ret.pos;
+        } else if(/^d(\d{2})+$/.test(path)) {
+          $.each(path.slice(1).chunk(2), function(jk, jv) {
+            if(jv.length != 2)
+              return true;
+            var pos = [jv[1]-1, jv[0]-1];
+            if(board[ pos[0] ][ pos[1] ] == null) {
+              console.log('('+pos[0]+', '+pos[1]+') is null, can not be delete.');
+              return true;
+            }
+            board[ pos[0] ][ pos[1] ] = null;
+          });
+        } else if(/^a(\d{2}[pef])+$/.test(path)) {
+          $.each(path.slice(1).chunk(3), function(jk, jv) {
+            if(jv.length != 3)
+              return true;
+            var pos = [jv[1]-1, jv[0]-1];
+            if(board[ pos[0] ][ pos[1] ] != null) {
+              console.log('('+pos[0]+', '+pos[1]+') is null, can not add.');
+              return true;
+            }
+            board[ pos[0] ][ pos[1] ] = roleMap[jv[2]];
+          });
+        }
+      });
+
+      $.each(board, function(ik, iv){
+        $.each(iv, function(jk, jv){
+          if(jv == null)
+            return true;
+          var cfg = config[jv];
+          var $td = $('#board-panel tr:eq('+ik+') td:eq('+jk+')');
+          var isActive = (ik == activePos[0] && jk == activePos[1]);
+          $td.addClass(isActive ? 'success' : cfg.bg).html('<span class="glyphicon glyphicon-'+cfg.icon+'"></span>');
+        });
+      });
+
+      window.board = board;
+      return true;
+    }
+
+    function movePath(board, path) {
+      var d = {};
+      d.board = board = clone(board);
+      d.pos = path.replace(/ /g,'').split('');
+      d.path = d.pos.splice(2);
+      for(var i = 0; i<2; i++)
+        d.pos[i] -= 1;
+      d.pos.reverse();
+
+      if(d.pos.length < 2)
+        return d;
+
+      try{
+        $.each(d.path, function(ik, iv){
+          if(direct[iv] == null)
+            throw new Error("direction error "+iv);
+          var newPos = [
+            d.pos[0] + direct[iv][0],
+            d.pos[1] + direct[iv][1],
+          ];
+          // 目的地不可有敵人
+          if(board[ newPos[0] ][ newPos[1] ] == 'enemy')
+            throw new Error("From ("+d.pos[0]+", "+d.pos[1]+") move to ("+newPos[0]+", "+newPos[1]+") error!");
+          // 走斜角時，不可有敵人阻擋在斜角的兩個分量
+          if( board[ d.pos[0] ][ newPos[1] ] == 'enemy' &&
+              board[ newPos[0] ][ d.pos[1] ] == 'enemy' )
+            throw new Error("From ("+d.pos[0]+", "+d.pos[1]+") move to ("+newPos[0]+", "+newPos[1]+") blocked by enemy!");
+
+          // 交換位置
+          var tmp = board[ d.pos[0] ][ d.pos[1] ];
+          board[ d.pos[0] ][ d.pos[1] ] = board[ newPos[0] ][ newPos[1] ];
+          board[ newPos[0] ][ newPos[1] ] = tmp;
+          d.pos = newPos;
+        });
+      } catch (e) {
+        d.err = e;
+      }
+
+      return d;
+    }
+
+    function clone(obj) {
+      var copy;
+
+      // Handle the 3 simple types, and null or undefined
+      if (null == obj || "object" != typeof obj) return obj;
+
+      // Handle Date
+      if (obj instanceof Date) {
+        copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+      }
+
+      // Handle Array
+      if (obj instanceof Array) {
+        copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+      }
+
+      // Handle Object
+      if (obj instanceof Object) {
+        copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+      }
+
+      throw new Error("Unable to copy obj! Its type isn't supported.");
+    }
+
+    function getPos($this) {
+      return ($this.index()+1).toString() + ($this.closest('tr').index()+1).toString();
+    }
+
+    window.board1 = board;
+    window.rander = rander;
+    window.movePath = movePath;
+
+    // main function
+    $(function(){
+      $autoInputTarget = $('#path');
+      $autoInputTarget.closest('.form-group').addClass('has-warning has-feedback');
+
+      $('#player, #enemy, #friend, #path').focus(function(){
+        if(! $autoInputTarget.is(this)) {
+          $autoInputTarget.closest('.form-group').removeClass('has-warning has-feedback');
+          $autoInputTarget = $(this);
+          $autoInputTarget.closest('.form-group').addClass('has-warning has-feedback');
+        }
+      }).on('change keyup', rander);
+
+      $('#board-panel').on('click', 'td', function(){
+        console.log('click', this);
+        var $this = $(this);
+        if($autoInputTarget.is('#path')) { // 焦點在路徑時
+          $autoInputTarget.val( $autoInputTarget.val() + getPos($this) );
+        } else {
+          // 焦點在 玩家、敵人、友軍 時
+
+          if($this.is(':has(span)')) {
+            $('#player, #enemy, #friend').each(function(){
+              var $input = $(this);
+              var positions = $input.val().replace(/ /g,'').chunk(2);
+              var no = positions.indexOf(getPos($this));
+              if(-1 !== no) {
+                positions.splice(no, 1);
+                $input.val(positions.join(' '));
+              }
+            });
+          } else {
+            $autoInputTarget.val( $autoInputTarget.val() + getPos($this) );
+          }
+        }
+        $autoInputTarget.focus();
+        rander();
+      });
+
+      rander();
+    });
+  })(jQuery);
+  </script>
+</body>
+</html>
