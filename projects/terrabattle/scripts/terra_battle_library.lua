@@ -52,6 +52,7 @@ function move_path(path)
 end
 
 function wait_your_turn()
+    local c;
     repeat
         mSleep(750);
         c = getColor(676, 235);
@@ -59,10 +60,11 @@ function wait_your_turn()
 end
 
 function click_wait_to_menu()
+    local c;
     repeat
         mSleep(750);
         c = getColor(588, 200);
-        if c == 0xFFB400 then
+        if c ~= 0xFFB400 then
             touchDown(9, 100, 100);
             mSleep(60);
             touchUp(9);

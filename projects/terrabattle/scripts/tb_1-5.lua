@@ -29,7 +29,7 @@ function main()
     };
 
     -- during stage
-    for ik, iv in pairs(path_1_5) do
+    for _, iv in pairs(path_1_5) do
         wait_your_turn();
         move_path(iv);
     end
