@@ -54,18 +54,18 @@ end
 function wait_your_turn()
     repeat
         mSleep(750);
-        x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
-    until x ~= -1 and y ~= -1;
+        c = getColor(676, 235);
+    until c == 0xF4FFC4;
 end
 
 function click_wait_to_menu()
     repeat
         mSleep(750);
-        x, y = findColorInRegion(0xFFB400, 588, 200, 588, 200);
-        if x == -1 and y == -1 then
+        c = getColor(588, 200);
+        if c == 0xFFB400 then
             touchDown(9, 100, 100);
             mSleep(60);
             touchUp(9);
         end
-    until x ~= -1 and y ~= -1;
+    until c == 0xFFB400;
 end
