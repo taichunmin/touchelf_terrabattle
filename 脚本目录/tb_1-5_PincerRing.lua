@@ -9,20 +9,29 @@ SCREEN_COLOR_BITS=32;
 function main()
     math.randomseed( os.time() );
     rotateScreen(0);
+    mSleep(960);
+    touchDown(10, 776, 1330);
+    mSleep(48);
+    touchUp(10);
 
-    local path_8_10 = {
-        "1563499692447",
-        "6344",
-        "433",
-        "133234489"
+    mSleep(2252);
+    touchDown(7, 474, 1820);
+    mSleep(66);
+    touchUp(7);
+
+    local path_1_5 = {
+        "289663877888493",
+        "52181292222347",
+        "3796189",
     };
 
     -- during stage
-    for ik, iv in pairs(path_8_10) do
+    for ik, iv in pairs(path_1_5) do
         wait_your_turn();
-        mSleep(1000);
         move_path(iv);
     end
 
+    -- stage end
+    click_wait_to_menu();
     mSleep(1000);
 end

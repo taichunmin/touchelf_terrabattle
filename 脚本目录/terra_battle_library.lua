@@ -53,15 +53,15 @@ end
 
 function wait_your_turn()
     repeat
-        x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
         mSleep(750);
+        x, y = findColorInRegion(0xF4FFC4, 676, 235, 676, 235);
     until x ~= -1 and y ~= -1;
 end
 
 function click_wait_to_menu()
     repeat
-        mSleep(2000);
-        x, y = findImageInRegionFuzzy("/var/touchelf/tb/stage_selection_stamina.bmp", 90, 583, 173, 690, 226, 0xFFFFFF);
+        mSleep(750);
+        x, y = findColorInRegion(0xFFB400, 588, 200, 588, 200);
         if x == -1 and y == -1 then
             touchDown(9, 100, 100);
             mSleep(60);

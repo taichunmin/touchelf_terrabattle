@@ -12,15 +12,14 @@ function main()
 
     local path_11_10 = {
         "23863869423474",
-		"6111368123",
-		"6687672987",
-		"123"
+        "6111368123",
+        "6687672987",
+        "123"
     };
 
     -- during stage
     for ik, iv in pairs(path_11_10) do
         wait_your_turn();
-        mSleep(1000);
         move_path(iv);
     end
 
