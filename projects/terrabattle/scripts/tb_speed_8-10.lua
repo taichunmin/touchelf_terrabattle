@@ -18,8 +18,10 @@ function main()
     };
 
     -- during stage
-    for _, iv in pairs(path_8_10) do
-        wait_your_turn();
+    for _, iv in pairs(path_1_5) do
+        if not wait_your_turn() then
+            break;
+        end
         move_path(iv);
     end
 

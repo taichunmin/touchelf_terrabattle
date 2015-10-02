@@ -55,8 +55,12 @@ function wait_your_turn()
     local c;
     repeat
         mSleep(750);
+        if is_result_page() then
+            return false;
+        end
         c = getColor(676, 235);
     until c == 0xF4FFC4;
+    return true;
 end
 
 function click_wait_to_menu()
@@ -70,4 +74,23 @@ function click_wait_to_menu()
             touchUp(9);
         end
     until c == 0xFFB400;
+end
+
+function is_result_page()
+    local pointColor = {
+        {341, 1843, 0x57605A},
+        {344, 2014, 0x555F59},
+        {261, 1926, 0x4C5962},
+        {433, 1939, 0x61654F},
+        {345, 1942, 0x000102},
+    };
+    local c;
+    for i = 1, #pointColor do
+        local pc = pointColor[i];
+        c = getColor(pc[1], pc[2]);
+        if c ~= pc[3] then
+            return false;
+        end
+    end
+    return true;
 end

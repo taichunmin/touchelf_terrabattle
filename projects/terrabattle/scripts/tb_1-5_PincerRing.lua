@@ -28,7 +28,9 @@ function main()
 
     -- during stage
     for _, iv in pairs(path_1_5) do
-        wait_your_turn();
+        if not wait_your_turn() then
+            break;
+        end
         move_path(iv);
     end
 
