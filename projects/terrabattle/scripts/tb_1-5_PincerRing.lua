@@ -10,7 +10,7 @@ function main()
     math.randomseed( os.time() );
     rotateScreen(0);
     mSleep(960);
-    touchDown(10, 776, 1330);
+    touchDown(10, 776, 1330); -- 240 * i + 160
     mSleep(48);
     touchUp(10);
 

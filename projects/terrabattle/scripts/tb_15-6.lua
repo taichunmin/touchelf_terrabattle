@@ -11,26 +11,28 @@ function main()
     rotateScreen(0);
     mSleep(960);
     -- 240 * i + 160
-    touchDown(10, 776, 1330);
+    touchDown(10, 750, 1600);
     mSleep(48);
     touchUp(10);
 
     mSleep(2252);
+    -- start button
     touchDown(7, 474, 1820);
     mSleep(66);
     touchUp(7);
 
-    local path_1_5 = {
-        "289662688888744934223",
-        "149666948",
-        "62476122268311624867178",
-        "55184189988312",
-        "26692981234268499887",
-        "52122322786247",
+    local path_15_6 = {
+        "2142229221",
+        "344423",
+        "168889",
+        "148886363",
+        "43397",
     };
 
+    click_wait_to_stage();
+
     -- during stage
-    for _, iv in pairs(path_1_5) do
+    for _, iv in pairs(path_15_6) do
         if not wait_your_turn() then
             break;
         end
