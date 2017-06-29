@@ -59,7 +59,7 @@ function wait_your_turn()
             return false;
         end
         c = getColor(676, 235);
-    until c == 0xF4FFC4;
+    until c == 0xF4FFC4 or c == 0xF5F8BF;
     return true;
 end
 
@@ -81,12 +81,12 @@ function click_wait_to_stage()
     repeat
         mSleep(750);
         c = getColor(676, 235);
-        if c ~= 0xF4FFC4 then
+        if c ~= 0xF4FFC4 and c ~= 0xF5F8BF then
             touchDown(9, 100, 100);
             mSleep(60);
             touchUp(9);
         end
-    until c == 0xF4FFC4;
+    until c == 0xF4FFC4 or c == 0xF5F8BF;
 end
 
 function is_result_page()
